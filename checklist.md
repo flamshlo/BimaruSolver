@@ -40,33 +40,46 @@
 ## 3. Modes
 ### 3.1 Count Entry setup mode
 - [ ] 1 From: New Game or initial game.
- - [ ] a. Clears Game grid and Counts.
+ - [ ] a. Clears Game grid and Counts. Update Status text. 
  - [ ] b. Sets game name. format: yyyy.mm.dd - nnn index for today. 
  - [ ] c. Enables: Name edit, Counts, List, Delete;   Disables: Game Grid, Play, Save;
  - [ ] d. Resets: Empty counts and grid.
  - [ ] e. Hides: (nothing)
 
 - [ ] 2 Data entry:
- - [ ] 2.1  Counts 
- - [ ] a. single digit.
- - [ ] b. cyclic auto-advance - row to column back to row indefinitely
- - [ ] c. arrows (up/down on col, left/right on row) navigate
- - [ ] d. backspace on cell clears cell and moves to one before
--- [ ] e. delete clears cell
--- [ ] f. if has ship hints in row/col, compare and mark solved/over/incomplete. warn if over. 
-- [ ] Digit entry auto-advance; backspace resets/moves back
-- [ ] 3.1.3 Auto-sea: Detected per row/col; exits stage when all filled
+  - [ ] 2.1  Counts 
+    - [ ] a. single digit.
+    - [ ] b. cyclic auto-advance - row to column back to row indefinitely
+    - [ ] c. arrows (up/down on col, left/right on row) navigate
+    - [ ] d. backspace on cell clears cell and moves to one before
+    - [ ] e. delete clears cell
+
+  - [ ] 2.2 Data Validation 
+    - [ ] 1. Auto-sea: Detected and marked in grid,  per row/col; Overrides disabled grid. skips any existing hints. 
+    - [ ] 2. Exits stage when all count cells are filled
 
 ### 3.2 Setup Mode: Hint Entry
-- [ ] 3.2.1 From: Counts filled / Loaded game; Enabled: Grid, Counts, Save; Disabled: Play
-- [ ] 3.2.2 Inputs: /M/S/U/D/L/R shortcuts; Right click clear
-- [ ] 3.2.3 Play Validation: Tests counts, sea, hints, solubility; blocks Play if invalid
+- [ ] 3.2.1 From: Counts filled / Loaded game;
+  - [ ] a. Enables: Grid, (continues: Counts), Save, (continues:List);
+  - [ ] b. Inputs: Mid/Sea/Up/Down/Left/Right/Single 
+  - [ ] c. Shortcuts: to be completed
+  - [ ] d. Right click clears
+
+- [ ] 3.2.2 Play-button pressed validations: (mark warn and stop for any errors)
+  - [ ] Test counts,
+  - [ ] Test auto sea,
+  - [ ] Test directed hints and no. 
+  - [ ] Test solubility; Block Play if invalid
 
 ### 3.3 Gameplay Mode
-- [ ] 3.3.1 Entry: Passed Validation; Enabled: Grid (part toggle)
-- [ ] 3.3.2 Mouse: Drag marks/unmarks sea; click toggles ship/sea
+- [ ] 3.3.1 From: Passed Validation after Play Game
+  - [ ] Enables: Grid (part toggle)
+  - [ ] Disables: Count cells. Hides Save (or changes it to Reset) and Saved games list.
+- [ ] 3.3.2 Mouse: Drag marks/unmarks sea - skipping hint and ship parts;
+- [ ] click toggles ship/sea
 - [ ] 3.3.3 Logic: Double-click solved (round corners); check limits; mark clashes orange 
-- [ ] 3.3.4 Completion: Flashing green glow (3x)
+- [ ] 3.3.4 Completion: Flashing green glow (3x) + Status: YOU DID IT! 
+- Exit: 
 
 ## 4. Global Visuals
 - [ ] 4.1 Animation: Throbbing arrow at input location
