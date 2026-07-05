@@ -1,92 +1,126 @@
-# Bimaru Solver Version Checklist
+# Bimaru Solver Checklist
+
+**IMPORTANT: This is a PUZZLE ENTRY and SOLVING APPLICATION. The user enters the entire puzzle (counts and hints) during setup mode. The application does NOT generate puzzles.**
 
 ## 1. Bimaru Rules and Definitions
-- [ ] 1.1 Counts: Row and column ship part totals. 
-- [ ] 1.2 Hints: Pre-filled ship and sea segments 
-- [ ] 1.3 Parts: Definite, tentative, solved (ship/sea)
-- [ ] 1.4 Adjacency (clashes): Ship-parts not adjacent in any direction. 
- - Conclusions: 
- - Diagonals to a ship-part must be Sea.
- - Sides perpendicular to adjacent ship-parts must be sea.
- - Capped ship-hint sides must be sea. (So a TB single part circular ship is completely surrounded by sea. )
- - 
-- [ ] 1.5 Ships: 1 carrier(4 parts), 2 battleship(3), 3 destroyer(2), 4 torpedo(1 part: circle)
-
+- [ ] 1.1 Counts: Row and column ship part totals
+- [ ] 1.2 Hints: Pre-filled ship and sea segments set on the board by the player during setup stage
+- [ ] 1.3 Playing-Parts: Ship and sea parts set on the board by the player during gameplay stage
+- [ ] 1.4 Adjacency (clashes): Ship-parts not adjacent in any direction
+  - Diagonals to a ship-part must be Sea
+  - Sides perpendicular to adjacent ship-parts must be sea
+  - Capped ship-hint sides must be sea (single part circular ship is completely surrounded by sea)
+- [ ] 1.5 Ships: 1 Aircraft-Carrier (4 parts), 2 Battleships (3 parts), 3 Destroyers (2 parts), 4 Torpedoes (1 part)
 - [ ] 1.6 Solution:
- - [ ] 1.6.1 Exactly all ships must be in solution. 
- - [ ] 1.6.2 All rows and columns filled according to their count cells.
- - [ ] - a. OVER: If there are more parts in row or col than listed in count cell: it is makrked orange (error)
- - [ ] - b. Solved/Incomplete - count cells are marked as solved (green) when correct amount of ships are set in the row or col. Game is done when all count cells turn green. Until then if no error they are marked incomplete. 
+  - [ ] 1.6.1 Exactly all ships must be in solution
+  - [ ] 1.6.2 All rows and columns filled according to their count cells
+  - [ ] 1.6.3 OVER: Error state when more parts in row or col than count cell
+  - [ ] 1.6.4 Solved/Incomplete: Count cells marked based on correctness
 
 ## 2. UI Layout
-### 2.1 board
-- [ ] 2.1 Board Grid (12x12):
-  - [ ] 2.1.1 The 10x10 Game grid.
-  - [ ] Count Entry: disabled.  Hint Entry: for hints. Game play: for parts, hints disabled. 
-
-- [ ] 2.1.2 Count cells (counts):  Col 12: Row counts, Row 12: Col counts
-  - [ ] Setup mode: Enabled. Game play mode: Disabled. 
-  - [ ] Marked solved (green), incomplete (red), over (orange)
-
+### 2.1 Board
+- [ ] 2.1.1 Board Grid (12x12):
+  - [ ] 10x10 Game grid (rows 1-10, columns 1-10)
+  - [ ] Row 11: Empty (padding)
+  - [ ] Column 11: Empty (padding)
+  - [ ] Row 12: Column count cells
+  - [ ] Column 12: Row count cells
+- [ ] 2.1.2 Grid Modes:
+  - [ ] Count Entry mode: Count cells active, game grid disabled, hints disabled
+  - [ ] Hint Entry mode: Game grid active for hints, count cells continue from previous mode
+  - [ ] Gameplay mode: Game grid active for playing-parts, count cells disabled, hints disabled
+- [ ] 2.1.3 Count Cell Status:
+  - [ ] Solved (correct number of parts placed)
+  - [ ] Incomplete (waiting for more parts)
+  - [ ] Over (too many parts - error state)
 
 ### 2.2 Sidebar
-- [ ] 2.2 Sidebar
- - [ ] 2.2.1 Top (always)  Bemaru-Solver Logo (Text), Version, [i button] (future use: instructions),
-   - New Game (always enabled)
-   - Game name (txtbox in setup mode, label in gameplay mode)
-   - Save / Reset - disabled till entry started. 
-   - Saved Games list (click loads game, red X delete button) - only in setup mode
+- [ ] 2.2.1 Header:
+  - [ ] Bimaru-Solver Logo (text)
+  - [ ] Version display
+  - [ ] Info button (future use for instructions)
+- [ ] 2.2.2 Controls:
+  - [ ] New Game button (always enabled)
+  - [ ] Game name textbox (setup mode) / label (gameplay mode)
+  - [ ] Save button (disabled until entry started)
+  - [ ] Reset button
+- [ ] 2.2.3 Saved Games List:
+  - [ ] Display saved games (setup mode only)
+  - [ ] Load game on click
+  - [ ] Delete button (red X) per game
 
-## 3. Modes
-### 3.1 Count Entry setup mode
-- [ ] 1 From: New Game or initial game.
- - [ ] a. Clears Game grid and Counts. Update Status text. 
- - [ ] b. Sets game name. format: yyyy.mm.dd - nnn index for today. 
- - [ ] c. Enables: Name edit, Counts, List, Delete;   Disables: Game Grid, Play, Save;
- - [ ] d. Resets: Empty counts and grid.
- - [ ] e. Hides: (nothing)
+## 3. Modes & Functionality
 
-- [ ] 2 Data entry:
-  - [ ] 2.1  Counts 
-    - [ ] a. single digit.
-    - [ ] b. cyclic auto-advance - row to column back to row indefinitely
-    - [ ] c. arrows (up/down on col, left/right on row) navigate
-    - [ ] d. backspace on cell clears cell and moves to one before
-    - [ ] e. delete clears cell
-
-  - [ ] 2.2 Data Validation 
-    - [ ] 1. Auto-sea: Detected and marked in grid,  per row/col; Overrides disabled grid. skips any existing hints. 
-    - [ ] 2. Exits stage when all count cells are filled
+### 3.1 Count Entry Setup Mode
+- [ ] 3.1.1 Activation (New Game / Initial Game):
+  - [ ] Clears Game grid and Counts
+  - [ ] Updates Status text
+  - [ ] Sets game name (format: yyyy.mm.dd - nnn index for today)
+  - [ ] Enables: Name edit, Counts, List, Delete
+  - [ ] Disables: Game Grid, Play, Save
+- [ ] 3.1.2 Data Entry - Counts:
+  - [ ] Single digit input only
+  - [ ] Cyclic auto-advance (row to column and back indefinitely)
+  - [ ] Arrow navigation (up/down for columns, left/right for rows)
+  - [ ] Backspace clears cell and moves back one cell
+  - [ ] Delete clears current cell
+- [ ] 3.1.3 Data Validation:
+  - [ ] Auto-sea detection per row/col based on counts
+  - [ ] Auto-sea marked in grid
+  - [ ] Auto-sea skips existing hints
+  - [ ] Exits stage when all count cells filled
 
 ### 3.2 Setup Mode: Hint Entry
-- [ ] 3.2.1 From: Counts filled / Loaded game;
-  - [ ] a. Enables: Grid, (continues: Counts), Save, (continues:List);
-  - [ ] b. Inputs: Mid/Sea/Up/Down/Left/Right/Single 
-  - [ ] c. Shortcuts: to be completed
-  - [ ] d. Right click clears
-
-- [ ] 3.2.2 Play-button pressed validations: (mark warn and stop for any errors)
-  - [ ] Test counts,
-  - [ ] Test auto sea,
-  - [ ] Test directed hints and no. 
-  - [ ] Test solubility; Block Play if invalid
+- [ ] 3.2.1 Activation (after counts filled or game loaded):
+  - [ ] Enables: Grid (for hint placement), continue Counts if needed, Save
+  - [ ] Continues: List, Delete
+- [ ] 3.2.2 Hint Inputs:
+  - [ ] Mid (middle of ship)
+  - [ ] Sea (water)
+  - [ ] Up (top end of ship)
+  - [ ] Down (bottom end of ship)
+  - [ ] Left (left end of ship)
+  - [ ] Right (right end of ship)
+  - [ ] Single (complete 1-part ship)
+  - [ ] Right-click to clear hint
+- [ ] 3.2.3 Play Button Validations (before entering Gameplay):
+  - [ ] Test counts validity
+  - [ ] Test auto-sea application
+  - [ ] Test directed hints and directional consistency
+  - [ ] Test solubility (puzzle can be solved)
+  - [ ] FUTURE FEATURE: Verify ship counts achievable
+  - [ ] Block Play if any validation fails (show warnings)
+  - [ ] On validation failure: Mark adjacent hints, stay in setup mode
 
 ### 3.3 Gameplay Mode
-- [ ] 3.3.1 From: Passed Validation after Play Game
-  - [ ] Enables: Grid (part toggle)
-  - [ ] Disables: Count cells. Hides Save (or changes it to Reset) and Saved games list.
-- [ ] 3.3.2 Mouse: Drag marks/unmarks sea - skipping hint and ship parts;
-- [ ] click toggles ship/sea
-- [ ] 3.3.3 Logic: Double-click solved (round corners); check limits; mark clashes orange 
-- [ ] 3.3.4 Completion: Flashing green glow (3x) + Status: YOU DID IT! 
-- Exit: 
+- [ ] 3.3.1 Activation (after Play button passes validation):
+  - [ ] Enables: Grid (playing-part toggle)
+  - [ ] Disables: Count cells, Hint entry
+  - [ ] Changes Save to Reset
+  - [ ] Hides Saved games list
+- [ ] 3.3.2 User Input:
+  - [ ] Drag marks/unmarks sea (skipping hint and ship parts)
+  - [ ] Click toggles ship/sea
+- [ ] 3.3.3 Game Logic:
+  - [ ] Detect ships: ensure all required ships are placed
+  - [ ] Check row/col limits against count cells
+  - [ ] Detect and mark clashes (error state)
+  - [ ] Double-click marks solved (visual indicator)
+- [ ] 3.3.4 Completion Detection:
+  - [ ] All required ships placed
+  - [ ] All rows/cols match their counts
+  - [ ] All cells filled (no empty cells)
+  - [ ] No clashes
+  - [ ] Display completion message
 
-## 4. Global Visuals
-- [ ] 4.1 Animation: Throbbing arrow at input location
-- [ ] 4.2 Part Definitions: Definite (Dark Green/polka dot), Tentative (Red ?), Solved (rounded corners)
-- [ ] 4.3 Sea Definitions: Definite Sea (Navy blue/red X), Detected Sea (Dark light-blue/small X)
-- [ ] 4.4 Hint Parts: Torpedo(circle), Mid(square), End(U/D/L/R), Sea Hint(wavy lines)
-
----
-
-**Error Remark:** 4.3(A-D)
+## 4. Core Functionality Checklist
+- [ ] 4.1 Grid rendering (12x12 with structured layout)
+- [ ] 4.2 Count cell management and validation
+- [ ] 4.3 Hint placement and storage
+- [ ] 4.4 Auto-sea calculation and marking
+- [ ] 4.5 Ship placement and adjacency checking
+- [ ] 4.6 Clash detection and marking
+- [ ] 4.7 Game state management (count entry, hint entry, gameplay)
+- [ ] 4.8 Save/Load functionality
+- [ ] 4.9 Game completion detection
+- [ ] 4.10 Input handling (keyboard, mouse, drag)
