@@ -1,8 +1,8 @@
-# Specs.md - Version 1.1
+# Specs.md - Version 1.2
 
 ## Bimaru Solver - Complete Specifications
 
-**Bimaru Solver** is a puzzle-solving application for the Bimaru puzzle game. It allows users to enter a puzzle (ship counts and hints) during a setup phase, then solve it by placing ship parts and sea cells on the board during gameplay.
+**Bimaru Solver** is a puzzle-solving application for the Bimaru puzzle game. It allows users to enter a puzzle (ship counts and hints) during a setup phase, then solve it by placing ship parts and se[...] 
 
 ---
 
@@ -55,6 +55,18 @@ Bimaru is a logic puzzle similar to Battleship. Players must locate hidden ships
    - All cells filled
    - Display "YOU DID IT!" with 3x green glow flash
 6. User can click "Reset" to go back to hint entry or start over
+
+---
+
+## Checklist (Instructions Area)
+
+This checklist provides quick, step-by-step instructions for users and a concise set of items for implementation verification.
+
+- Count Setup (see Instructions below)
+- Hint Setup (see Instructions below)
+- Gameplay (see Instructions below)
+
+<p style="color:red; font-weight:bold; font-size:1.1em">ERRORS: If validation or gameplay errors occur, show clear error indicators and prevent progression until resolved. (Specific error messages: To be determined)</p>
 
 ---
 
@@ -133,6 +145,10 @@ Before entering Gameplay, verify:
 4. Puzzle is solvable (solubility check)
 5. FUTURE: Ship counts are achievable with given hints
 6. If any validation fails: show warning, mark adjacent hints, stay in setup
+
+<p style="color:red; font-weight:bold; font-size:1.1em">ERRORS (detailed instructions): Right-click to clear a cell. If validation or gameplay errors occur, display clear error indicators and messages. Specific error messages: To be determined.</p>
+
+---
 
 ### Clash Detection
 During gameplay, detect and mark:
@@ -238,3 +254,18 @@ Game ends when:
 4. **Accessibility**: Clear visual feedback, keyboard support
 5. **Validation**: Comprehensive checks before gameplay
 6. **Auto-Sea**: Intelligent calculation and locking mechanism
+
+## Instructions (Detailed)
+
+These instructions are also included in the Checklist area above for quick reference.
+
+1. Counts setup:
+   - Enter ship part counts (0-8). Entering a digit will move to the next cell. Right mouse button to clear a cell. Once all cells are full you will be able to enter hints, and start playing.
+
+2. Hint setup:
+   - Click on the game cells to enter hints. Repeatedly clicking toggles to the next hint shape. Right mouse button clears the cell. You may replace ship count numbers. When done press PLAY GAME.
+
+3. Gameplay:
+   - Click on the available game cells to toggle between definite possible and solved game parts. Right Mouse button to clear cell. You cannot change hints and auto-deduced Sea.
+
+
