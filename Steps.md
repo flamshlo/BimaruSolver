@@ -28,8 +28,21 @@ NOTHING ELSE.
 Step 3:  change to version 3.3 
 Add instruction area under Mode line:   Enter ship parts count. Once done you'll be able to enter hints. 
 
-1. When all hints entered enable hint entry in grid.
-2. change mode to Set up hints. 
-3. Clicking on grid or entering a number toggles between SEA (Black X on white), SHIP (black square), Black U parts:  Up, Down, Left, Right, and single (Black Circle).
+1. Keep everything from steps 1 and 2.
+2. Only when all counts are entered move to hint entry mode: till then count entry mode. 
+reminder: in count entry mode play grid is disabled and so is PLAY GAME button,. 
+3. hint entry mode: grid enabled (10x10 enabled) entering digit changes to hint part or empty. PLAY GAME enabled. 
+4. change mode to: "Set up hints"
+5. Clicking on grid or entering a number toggles between hints:  SEA (Black X on white),  single (Black Circle), MID (black square), Black U parts:  Up, Down, Left, Right..
+6. Entering ship-hints, and changing counts, checks ship hints against count, marks full count as green, missing parts as clear, and over-count as red (error) - and disables PLAY GAME. 
+fixing count or hint re-enables Game Play if no count errors. 
+7. Instructions: Enter Hints: Click on grid to toggle between SEA, MID, SINGLE, DOWN, LEFT, UP, RIGHT. Fix any errors. When done Press Play Game. 
+
+Step 4. PLAY GAME PRESS. change to version 3.4
+1. Keep all from steps till this. 
+2. On PLAY GAME pressed 
+3. Verify no over zero. 
+3. Fill in deduced Sea parts (diagonals, sides not in direction of hinted ship. lines with all ships in count. 
+
 Right mouse once clears a square then toggles to add question mark, or add exclamation mark. and again to clear. 
 Dragging mouse on several squares set empty ones as SEA. 
