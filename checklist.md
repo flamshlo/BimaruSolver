@@ -17,34 +17,47 @@
   - [ ] 1.6.3 OVER: Error state when more parts in row or col than count cell
   - [ ] 1.6.4 Solved/Incomplete: Count cells marked based on correctness
 
-## 2. UI Layout
-### 2.1 Board
+## 2. UI Layout & Board Structure
+
+**CRITICAL: The board is the SAME physical 12x12 grid used for all modes. Different modes enable/disable different cell types.**
+
+### 2.1 Board Grid Structure
 - [ ] 2.1.1 Board Grid (12x12):
   - [ ] 10x10 Game grid (rows 1-10, columns 1-10)
   - [ ] Row 11: Empty (padding)
   - [ ] Column 11: Empty (padding)
   - [ ] Row 12: Column count cells
   - [ ] Column 12: Row count cells
-- [ ] 2.1.2 Grid Modes:
-  - [ ] Count Entry mode: Count cells active, game grid disabled, hints disabled
-  - [ ] Hint Entry mode: Game grid active for hints, count cells continue from previous mode
-  - [ ] Gameplay mode: Game grid active for playing-parts, count cells disabled, hints disabled
-- [ ] 2.1.3 Count Cell Status:
-  - [ ] Solved (correct number of parts placed)
-  - [ ] Incomplete (waiting for more parts)
-  - [ ] Over (too many parts - error state)
 
-### 2.2 Sidebar
-- [ ] 2.2.1 Header:
+### 2.2 Board Cell Types & Mode Behavior
+- [ ] 2.2.1 Count Cells (Row 12, Column 12):
+  - [ ] Count Entry mode: ENABLED for input
+  - [ ] Hint Entry mode: ENABLED for input (counts can be changed)
+  - [ ] Gameplay mode: DISABLED (locked, read-only)
+- [ ] 2.2.2 Hint Cells (10x10 grid during setup):
+  - [ ] Count Entry mode: DISABLED (locked, read-only)
+  - [ ] Hint Entry mode: ENABLED for toggle/clear
+  - [ ] Gameplay mode: DISABLED/LOCKED (cannot be modified or deleted)
+- [ ] 2.2.3 Auto-Deduced Sea Cells:
+  - [ ] Count Entry mode: Marked automatically from counts
+  - [ ] Hint Entry mode: Visible but locked (read-only)
+  - [ ] Gameplay mode: DISABLED/LOCKED (cannot be modified or deleted)
+- [ ] 2.2.4 Playing-Part Cells (10x10 grid during gameplay):
+  - [ ] Count Entry mode: DISABLED (locked)
+  - [ ] Hint Entry mode: DISABLED (locked)
+  - [ ] Gameplay mode: ENABLED for toggle (ship/sea/empty)
+
+### 2.3 Sidebar
+- [ ] 2.3.1 Header:
   - [ ] Bimaru-Solver Logo (text)
   - [ ] Version display
   - [ ] Info button (future use for instructions)
-- [ ] 2.2.2 Controls:
+- [ ] 2.3.2 Controls:
   - [ ] New Game button (always enabled)
   - [ ] Game name textbox (setup mode) / label (gameplay mode)
   - [ ] Save button (disabled until entry started)
   - [ ] Reset button
-- [ ] 2.2.3 Saved Games List:
+- [ ] 2.3.3 Saved Games List:
   - [ ] Display saved games (setup mode only)
   - [ ] Load game on click
   - [ ] Delete button (red X) per game
@@ -56,8 +69,8 @@
   - [ ] Clears Game grid and Counts
   - [ ] Updates Status text
   - [ ] Sets game name (format: yyyy.mm.dd - nnn index for today)
-  - [ ] Enables: Name edit, Counts, List, Delete
-  - [ ] Disables: Game Grid, Play, Save
+  - [ ] Enables: Name edit, Count cells only
+  - [ ] Disables: Hint cells, Playing-part cells, Play button
 - [ ] 3.1.2 Data Entry - Counts:
   - [ ] Single digit input only
   - [ ] Cyclic auto-advance (row to column and back indefinitely)
@@ -66,15 +79,19 @@
   - [ ] Delete clears current cell
 - [ ] 3.1.3 Data Validation:
   - [ ] Auto-sea detection per row/col based on counts
-  - [ ] Auto-sea marked in grid
+  - [ ] Auto-sea marked in grid (visual indicator)
   - [ ] Auto-sea skips existing hints
   - [ ] Exits stage when all count cells filled
 
 ### 3.2 Setup Mode: Hint Entry
 - [ ] 3.2.1 Activation (after counts filled or game loaded):
-  - [ ] Enables: Grid (for hint placement), continue Counts if needed, Save
+  - [ ] Enables: Hint cells (for toggle/clear), Count cells (can be changed), Save button
+  - [ ] Disables: Playing-part cells, Play button
   - [ ] Continues: List, Delete
-- [ ] 3.2.2 Hint Inputs:
+- [ ] 3.2.2 Hint Cell Operations:
+  - [ ] Click to toggle hint types
+  - [ ] Right-click to clear hint
+- [ ] 3.2.3 Hint Input Types:
   - [ ] Mid (middle of ship)
   - [ ] Sea (water)
   - [ ] Up (top end of ship)
@@ -82,8 +99,10 @@
   - [ ] Left (left end of ship)
   - [ ] Right (right end of ship)
   - [ ] Single (complete 1-part ship)
-  - [ ] Right-click to clear hint
-- [ ] 3.2.3 Play Button Validations (before entering Gameplay):
+- [ ] 3.2.4 Count Modification in Hint Entry:
+  - [ ] Counts can be edited at any time during hint entry
+  - [ ] Auto-sea recalculates when counts change
+- [ ] 3.2.5 Play Button Validations (before entering Gameplay):
   - [ ] Test counts validity
   - [ ] Test auto-sea application
   - [ ] Test directed hints and directional consistency
@@ -91,16 +110,21 @@
   - [ ] FUTURE FEATURE: Verify ship counts achievable
   - [ ] Block Play if any validation fails (show warnings)
   - [ ] On validation failure: Mark adjacent hints, stay in setup mode
+- [ ] 3.2.6 Auto-Sea Calculation on Play Button:
+  - [ ] When Play button validates successfully, auto-deduced sea cells are determined and locked
+  - [ ] These cells cannot be modified in gameplay
 
 ### 3.3 Gameplay Mode
 - [ ] 3.3.1 Activation (after Play button passes validation):
-  - [ ] Enables: Grid (playing-part toggle)
-  - [ ] Disables: Count cells, Hint entry
+  - [ ] Enables: Playing-part cells (toggle ship/sea/empty)
+  - [ ] Disables: Count cells (LOCKED)
+  - [ ] Disables: Hint cells (LOCKED)
+  - [ ] Disables: Auto-sea cells (LOCKED)
   - [ ] Changes Save to Reset
   - [ ] Hides Saved games list
-- [ ] 3.3.2 User Input:
+- [ ] 3.3.2 Playing-Part Input:
+  - [ ] Click to toggle: ship part ↔ sea ↔ empty
   - [ ] Drag marks/unmarks sea (skipping hint and ship parts)
-  - [ ] Click toggles ship/sea
 - [ ] 3.3.3 Game Logic:
   - [ ] Detect ships: ensure all required ships are placed
   - [ ] Check row/col limits against count cells
@@ -114,13 +138,15 @@
   - [ ] Display completion message
 
 ## 4. Core Functionality Checklist
-- [ ] 4.1 Grid rendering (12x12 with structured layout)
+- [ ] 4.1 Grid rendering (12x12 with structured layout, same board for all modes)
 - [ ] 4.2 Count cell management and validation
 - [ ] 4.3 Hint placement and storage
 - [ ] 4.4 Auto-sea calculation and marking
-- [ ] 4.5 Ship placement and adjacency checking
-- [ ] 4.6 Clash detection and marking
-- [ ] 4.7 Game state management (count entry, hint entry, gameplay)
-- [ ] 4.8 Save/Load functionality
-- [ ] 4.9 Game completion detection
-- [ ] 4.10 Input handling (keyboard, mouse, drag)
+- [ ] 4.5 Auto-sea locking when Play button succeeds
+- [ ] 4.6 Ship placement and adjacency checking
+- [ ] 4.7 Clash detection and marking
+- [ ] 4.8 Game state management (count entry, hint entry, gameplay)
+- [ ] 4.9 Cell disable/lock management across modes
+- [ ] 4.10 Save/Load functionality
+- [ ] 4.11 Game completion detection
+- [ ] 4.12 Input handling (keyboard, mouse, drag)
