@@ -1,8 +1,8 @@
-# Specs.md - Version 1.2
+# Specs.md - Version 1.3
 
 ## Bimaru Solver - Complete Specifications
 
-**Bimaru Solver** is a puzzle-solving application for the Bimaru puzzle game. It allows users to enter a puzzle (ship counts and hints) during a setup phase, then solve it by placing ship parts and se[...] 
+**Bimaru Solver** is a puzzle-solving application for the Bimaru puzzle game. It allows users to enter a puzzle (ship counts and hints) during a setup phase, then solve it by placing ship parts and sealing empty cells with deduced "sea".
 
 ---
 
@@ -62,11 +62,12 @@ Bimaru is a logic puzzle similar to Battleship. Players must locate hidden ships
 
 This checklist provides quick, step-by-step instructions for users and a concise set of items for implementation verification.
 
+- **Logo**: Display "Bimaru Solver v1.3" (logo includes version number)
 - Count Setup (see Instructions below)
 - Hint Setup (see Instructions below)
 - Gameplay (see Instructions below)
 
-<p style="color:red; font-weight:bold; font-size:1.1em">ERRORS: If validation or gameplay errors occur, show clear error indicators and prevent progression until resolved. (Specific error messages: To be determined)</p>
+<p style="color:red; font-weight:bold; font-size:1.1em">ERRORS: If validation or gameplay errors occur, show clear error indicators and prevent progression until resolved. (Specific error messages: To be documented.)</p>
 
 ---
 
@@ -146,7 +147,7 @@ Before entering Gameplay, verify:
 5. FUTURE: Ship counts are achievable with given hints
 6. If any validation fails: show warning, mark adjacent hints, stay in setup
 
-<p style="color:red; font-weight:bold; font-size:1.1em">ERRORS (detailed instructions): Right-click to clear a cell. If validation or gameplay errors occur, display clear error indicators and messages. Specific error messages: To be determined.</p>
+<p style="color:red; font-weight:bold; font-size:1.1em">ERRORS (detailed instructions): Right-click to clear a cell. If validation or gameplay errors occur, display clear error indicators and messages.</p>
 
 ---
 
@@ -237,7 +238,7 @@ Game ends when:
 - Clear cell boundaries
 
 ### Sidebar
-- **Header**: Logo, version, info button
+- **Header**: Logo with version (v1.3), info button
 - **Controls**: New Game, Game name (textbox/label), Save, Reset
 - **Saved Games**: List with click to load, red X to delete
 
@@ -267,5 +268,4 @@ These instructions are also included in the Checklist area above for quick refer
 
 3. Gameplay:
    - Click on the available game cells to toggle between definite possible and solved game parts. Right Mouse button to clear cell. You cannot change hints and auto-deduced Sea.
-
 
